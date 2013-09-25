@@ -13,9 +13,9 @@
         <script type="text/template" id="single_post_template">
         	<ul>
         		<% _.each(posts, function(post) { %>
+                    <p>Post</p>
 					<h1><%= post.title %></h1>
-					<p><a href='<%= post.url %>'>Go to Page</a></p>
-					<p><%= post.content %></p>
+					<p><%= post.synopsis %></p>
 				<%});%>
 			</ul>
 		</script>
