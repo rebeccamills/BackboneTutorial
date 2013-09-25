@@ -1,6 +1,8 @@
 <?php
 
-  $query = $_POST['query'];
+  $post_statement = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
+
+  $query = $post_statement->query; 
 
   $apikey = 'sgrfykg5tt5cyj7kahhyyb8t';
 

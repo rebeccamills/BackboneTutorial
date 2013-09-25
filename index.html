@@ -10,15 +10,30 @@
         <h2>See All Posts</h2>
         <div id="posts_container"></div>
 
-        <script type="text/template" id="single_post_template">
-        	<ul>
+        <script type="text/template" id="movie_list">
+        	<section id="movie-list">
         		<% _.each(posts, function(post) { %>
-                    <p>Post</p>
-					<h1><%= post.title %></h1>
-					<p><%= post.synopsis %></p>
+                    <div class="movie-container list">
+                        <img src="<%= post.posters.thumbnail %>">
+    					<h1><%= post.title %> (<span class="year"><%= post.year %></span>)</h1>
+                    </div>
 				<%});%>
-			</ul>
+			</section>
 		</script>
+
+        <script type="text/template" id="movie_single">
+            <section id="movie-single">
+                <div class="movie-containe single">
+                    <img src="<%= post.posters.thumbnail %>">
+                    <h1><%= post.title %> (<span class="year"><%= post.year %></span>)</h1>
+                    <strong>Actors:</strong>
+                    <% _.each(post.abridged_cast, function(actor, i) { %>
+                        <h5><%= actor.name %></h5>
+                    <%});%>
+                    <p><%= post.synopsis %></p>
+                </div>
+            </section>
+        </script>
 
     </body>
 </html>

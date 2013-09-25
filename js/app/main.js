@@ -4,6 +4,8 @@ require([
     'backbone',
 ], function($, _, Backbone){
 
+    var url_root = "http://10.6.1.124/~jorgesilvajetter/2013/BackboneTutorial/"
+
     $.ajaxSetup({
         crossDomain: true,
         dataType: 'jsonp',
@@ -44,7 +46,7 @@ require([
     *********************/
 
     var QueryPost = Backbone.Model.extend({
-        url: 'http://localhost/~jorgesilva/2013/BackboneTutorial/api/index.php',
+        url: url_root + 'api/index.php',
         defaults: {
             query :'',
             results : '',
@@ -54,6 +56,9 @@ require([
 
         },
         parse : function(response){
+
+            console.log(this);
+
             console.log(" * Parsing Query * ");
             console.log(response.movies);
             all = [];
@@ -90,9 +95,10 @@ require([
 
     ListPosts = Backbone.View.extend({
         el: '#posts_container',
-        template: _.template($("#single_post_template").html()),
+        template: _.template($("#movie_list").html()),
         initialize: function(){
             this.coll = allPosts;
+            this.lastSelectedModel = null;
             this.listenTo(this.coll, 'reset', this.render);
             //console.log(this.coll.toJSON());
             this.render();
@@ -107,12 +113,24 @@ require([
         prettiFy: function( event ){
             // Button clicked, you can access the element that was clicked with event.currentTarget
             console.log( "prettiFy" );
+        },
+        events: {
+            "click": "goToSingle"
+        },
+        goToSingle: function( event ){
+            // Button clicked, you can access the element that was clicked with event.currentTarget
+            console.log("Go To Single");
+            console.log(this);
+            console.log(this.model);
+            console.log(event);
+        },
+        renderSingle : function(){
+
+            console.log
+            this.$el.html(this.template( ));
         }
     });
 
-    setTimeout(function(){
-
-    }, 2000);
 
     /* Utilities 
     ************************/
