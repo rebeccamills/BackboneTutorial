@@ -7,6 +7,8 @@
     <body>
         <h1>jQuery+RequireJS Sample Page</h1>
         <p>Look at source or inspect the DOM to see how it works.</p>
+        <div id="search_container"></div>
+
         <h2>See All Posts</h2>
         <div id="posts_container"></div>
 
@@ -32,6 +34,14 @@
                     <%});%>
                     <p><%= post.synopsis %></p>
                 </div>
+            </section>
+        </script>
+
+        <!-- Search -->
+        <script type="text/template" id="search_template">
+            <section id="search">
+                <input class="search_box"value="Batman" type="text">
+                <input class="submit" type="Submit">Search</input>
             </section>
         </script>
 

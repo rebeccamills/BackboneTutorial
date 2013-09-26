@@ -57,7 +57,7 @@ require([
         },
         parse : function(response){
 
-            console.log(this);
+            //console.log(this);
 
             console.log(" * Parsing Query * ");
             console.log(response.movies);
@@ -69,6 +69,7 @@ require([
             console.log(allPosts.models);
 
             var list_view = new ListPosts();
+            var serach_view = new SearchView();
 
             return response.movies;
         }
@@ -83,12 +84,18 @@ require([
     
     var initial_query = new QueryPost();
 
-    initial_query.save(this_query, {
-        success: function (initial_query) {
-            console.log(" * initial_query * ");
-            console.log(initial_query);            
-        }
-    })
+    function queryPosts(query){
+
+        console.log("THE QUERY:" + query);
+
+        initial_query.save(query, {
+            success: function (initial_query) {
+                console.log(" * initial_query * ");
+                console.log(initial_query);            
+            }
+        })
+    }
+    queryPosts(this_query);
 
     /* Views 
     ************************/
@@ -119,15 +126,41 @@ require([
         },
         goToSingle: function( event ){
             // Button clicked, you can access the element that was clicked with event.currentTarget
+            console.log("---------------");
             console.log("Go To Single");
-            console.log(this);
-            console.log(this.model);
+            console.log(this); // This is our view
             console.log(event);
+            console.log("---------------");
         },
         renderSingle : function(){
 
             console.log
             this.$el.html(this.template( ));
+        }
+    });
+
+    
+    SearchView = Backbone.View.extend({
+        el: '#search_container',
+        template: _.template($("#search_template").html()),
+        initialize: function(){
+            console.log("Init Search View");
+            this.render();
+        },
+        render: function(){
+            this.$el.html(this.template());
+            return this;
+        },
+        events : {
+            "change" : "query_posts",
+            'click .submit' :  "query_posts",
+        },
+        query_posts : function(){
+            var this_query_term = $(this.el).find('.search_box').val();
+            var this_query = {
+                query: this_query_term,
+            }
+            queryPosts(this_query);
         }
     });
 
