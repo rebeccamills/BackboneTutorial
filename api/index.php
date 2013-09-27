@@ -1,8 +1,8 @@
 <?php
 
-  $post_statement = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
+  $movie_statement = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
 
-  $query = $post_statement->query; 
+  $query = $movie_statement->query; 
 
   $apikey = 'sgrfykg5tt5cyj7kahhyyb8t';
 

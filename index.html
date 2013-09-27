@@ -1,38 +1,84 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>jQuery+RequireJS Sample Page</title>
+        <title>Pugalicious</title>
+        <link rel="stylesheet/less" type="text/css" href="style.less" />
+        <script src="js/lib/less.js"></script>
         <script data-main="js/app" src="js/lib/require.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+        
     </head>
     <body>
-        <h1>jQuery+RequireJS Sample Page</h1>
-        <p>Look at source or inspect the DOM to see how it works.</p>
-        <div id="search_container"></div>
+        <section id='wrapper'>
+            <div id='header'>
+                <h1><a href="#">Pugalicious</a></h1>
+                <p>A Simple Movie Search Engine. Built on Backbone and the Rotten Tomatoes API.</p>
+            </div>
+            <div id="search_container"></div>
+            <div id="movies_container"></div>
+        </section>
 
-        <h2>See All Posts</h2>
-        <div id="posts_container"></div>
+        <!-- Home -->
+        <script type="text/template" id="home_view">
+            <section class="plain-view">
+                <p>Hello! Start by typing in your search in the search box above</p>
+            </section>
+        </script>
 
+        <!-- Not Found -->
+        <script type="text/template" id="not_found_view">
+            <section class="plain-view">
+                <p>Sorry, we couldnt find anything.</p>
+            </section>
+        </script>
+
+        <!-- List -->
         <script type="text/template" id="movie_list">
         	<section id="movie-list">
-        		<% _.each(posts, function(post) { %>
+        		<% _.each(movies, function(movie) { %>
                     <div class="movie-container list">
-                        <img src="<%= post.posters.thumbnail %>">
-    					<h1><%= post.title %> (<span class="year"><%= post.year %></span>)</h1>
+                        <img src="<%= movie.movieers.thumbnail %>">
+    					<h1><%= movie.title %> (<span class="year"><%= movie.year %></span>)</h1>
                     </div>
 				<%});%>
 			</section>
 		</script>
 
+        <!-- Single Short -->
+        <script type="text/template" id="movie_single_short">
+            <div class="movie-container list">
+                <img src="<%= movie.movieers.detailed %>">
+                <h3><%= movie.title %> (<span class="year"><%= movie.year %></span>)</h3>
+                <div style='clear: both'></div>
+            </div>
+        </script>
+
+        <!-- Single -->
         <script type="text/template" id="movie_single">
             <section id="movie-single">
-                <div class="movie-containe single">
-                    <img src="<%= post.posters.thumbnail %>">
-                    <h1><%= post.title %> (<span class="year"><%= post.year %></span>)</h1>
-                    <strong>Actors:</strong>
-                    <% _.each(post.abridged_cast, function(actor, i) { %>
-                        <h5><%= actor.name %></h5>
-                    <%});%>
-                    <p><%= post.synopsis %></p>
+                <div class="movie-single">
+                    <h2><%= movie.title %> (<span class="year"><%= movie.year %></span>)</h2>
+                    <img src="<%= movie.movieers.original %>">
+                    <div class='rating'>
+                        <span class="audience-rating">Audience Rating: <span><%= movie.ratings.audience_score %>%</span></span>
+                    </div>
+                   
+                    <% if (typeof(date) != "undefined") { %>
+                        <div class='synopsis not_available'>
+                            <p><%= movie.synopsis %></p>
+                        </div>
+                    <% } else { %>
+                        <div class='synopsis not_available'>
+                            <p class="not_available">No sinopsis available for this film.</p>
+                        </div>
+                    <% } %>
+                    <div class='actors'>
+                        <h5>Cast:</h5>
+                        <% _.each(movie.abridged_cast, function(actor, i) { %>
+                            <a href="#" onclick='alert("Image Youre Going To This Page.")'><%= actor.name %></a>
+                        <%});%>
+                    </div>
+                    <a class="single-link" href='<%= movie.links.alternate %>'>View in Rotten Tomatoes</a>
                 </div>
             </section>
         </script>
@@ -40,8 +86,8 @@
         <!-- Search -->
         <script type="text/template" id="search_template">
             <section id="search">
-                <input class="search_box"value="Batman" type="text">
-                <input class="submit" type="Submit">Search</input>
+                <input class="search-box" placeholder="Search" type="text">
+                <input class="submit" type="Submit">
             </section>
         </script>
 

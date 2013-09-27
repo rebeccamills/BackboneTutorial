@@ -1,0 +1,170 @@
+@mainColor:  #295DE2;
+@textColor:  #777777;
+
+.gradient (@startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+body {
+	background: @mainColor;
+	font-family: 'lato', helvetica, sans-serif;
+	background-image: url('imgs/pug2.gif');
+	background-size: 74px;
+	#wrapper {
+		width: 450px;
+		margin: 0px auto;
+		box-shadow: 0px 0px 5px #241002;
+		background-color: #fff;
+		padding: 30px;
+		#header {
+			h1 {
+				text-transform: uppercase;
+				font-size: 33px;
+				letter-spacing: 0.2em;
+				background: url('http://localhost/~jorgesilva/2013/BackboneTutorial/imgs/main.jpg');
+				border-bottom: solid 1px @mainColor;
+				background-size: 126px;
+				background-position: left;
+				padding: 0px 0px 47px;
+				padding: 27px 0px 47px 118px;
+				color: @mainColor;
+				text-shadow: 1px 1px 1px #000;
+				text-align: center;
+				margin: 5px 0px;
+				background-repeat: no-repeat;
+				a {
+					text-decoration: none;
+					color: @mainColor;
+				}
+				a:hover {
+					color: #000;
+				}
+			}
+			p {
+				color: @textColor;
+				text-align: center;
+				font-size: 12px;
+			}
+		}
+		#search {
+			border-bottom: solid @mainColor 1px;
+			border-top: solid @mainColor 1px;
+			padding: 10px 0px ;
+			margin-bottom: 10px;
+			input {
+				font-size: 22px;
+				padding: 6px;
+				&.submit {
+					padding: 8px 15px;
+					font-size: 21px;
+					background-color: @mainColor;
+					.gradient(@mainColor, #113FB6);
+					color: #fff;
+					text-shadow: 1px 1px 1px #444;
+					border: 1px solid #122452;
+					border-radius: 5px;
+					&:hover {
+						cursor: pointer;
+					}
+				}
+				&.search-box {
+					width: 318px;
+					float: left;
+					margin-right: 3px;
+				}
+			}
+		}
+		#movies_container {
+			.plain-view {
+				p {
+					color: #777;
+					padding: 15px;
+				}
+			}
+			.movie-container {
+				clear: both;
+				padding: 10px 0px;
+				border-bottom: solid @mainColor 1px;
+				&:hover {
+					cursor: pointer;
+				}
+				img {
+					float: left;
+					width: 63px;
+						height: auto !important;
+				}
+				h3 {
+					margin-left: 80px;
+					color: @mainColor;
+				}
+			}
+			#movie-single {
+				.movie-single {
+					h2 {
+						text-transform: uppercase;
+						font-size: 24px;
+						letter-spacing: 0.2em;
+						border-bottom: solid 1px @mainColor;
+						padding: 10px 0px;
+						color: @mainColor;
+						text-shadow: 1px 1px 0.5px #444;
+						text-align: center;
+						margin: 5px 0px;
+					}
+					img {
+						max-width: 300px;
+						max-height: 300px;
+						display: block;
+						margin: 0px auto;
+					}
+					.rating {
+						text-align: center;
+						color: #777;
+						padding: 10px;
+						margin: 5px 0px;
+						border-bottom: solid 1px @mainColor;
+						border-top: solid 1px @mainColor;
+						span {
+							span {
+								color: @mainColor;
+								font-weight: bold;
+							}
+						}
+					}
+					.synopsis {
+						padding: 10px 20px;
+						color: #777;
+						&.not_available {
+							border: #444;
+							border: solid 1px #999;
+							background-color: #efefef;
+						}
+					}
+					.single-link {
+						text-align: center;
+						color: #777;
+					}
+					.actors {
+						margin: 10px 0px;
+						h5 {
+							color: @mainColor;
+							letter-spacing: 0.2em;
+							text-transform: uppercase;
+						}
+						a {
+							color: #1555FA;
+							&:hover {
+								color: #000;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
